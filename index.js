@@ -35,6 +35,14 @@ async function run() {
       res.json(result);
     });
 
+    // post method for user
+    app.post("/users", async (req, res) => {
+      console.log(req.body);
+      const entity = req.body;
+      const result = await userCollections.insertOne(entity);
+      res.json(result);
+    });
+
     // post method for users
     app.put('/users/:id', async (req, res) => {
       const id = req.params.id;
@@ -49,7 +57,7 @@ async function run() {
           },
       };
       const result = await userCollections.updateOne(filter, updateDoc, options)
-      console.log('updating', id)
+      console.log(result)
       res.json(result)
   })
 
