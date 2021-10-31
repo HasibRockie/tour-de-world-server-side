@@ -11,11 +11,8 @@ app.get("/", (req, res) => {
   res.send("Tour de world is running");
 });
 
-// TourDeWorld
-// 7IWEHldps84qGnZH
-
 const uri =
-  "mongodb+srv://TourDeWorld:7IWEHldps84qGnZH@cluster0.xllaf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xllaf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
