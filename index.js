@@ -6,6 +6,7 @@ const port = process.env.PORT || 5000;
 const ObjectId = require("mongodb").ObjectId;
 app.use(cors());
 app.use(express.json());
+require('dotenv').config()
 
 app.get("/", (req, res) => {
   res.send("Tour de world is running");
@@ -17,6 +18,9 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+console.log(process.env.DB_USER, process.env.DB_pass);
+console.log(process.env);
 
 async function run() {
   try {
@@ -88,6 +92,18 @@ async function run() {
       const result = await servicesCollections.findOne(query)
       res.send(result);
     });
+
+      // DELETE API
+      app.delete('/services/:service', async (req, res) => {
+        const service = req.params.service;
+        const query = { _id: ObjectId(service) };
+        const result = await servicesCollections.deleteOne(query);
+
+        res.json(result);
+    })
+
+
+
   } finally {
     // await client.close();
   }
