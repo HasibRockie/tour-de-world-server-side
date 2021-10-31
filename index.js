@@ -53,7 +53,8 @@ async function run() {
           $set: {
               user: updatedUser.user,
               cart: updatedUser.cart,
-              orders: updatedUser.orders
+              orders: updatedUser.orders,
+              details: updatedUser.details
           },
       };
       const result = await userCollections.updateOne(filter, updateDoc, options)
